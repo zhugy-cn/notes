@@ -114,7 +114,7 @@
     		dump($request->action());		
 
 	10. input助手函数
-		1.
+		1. 
 
 
   </script>
