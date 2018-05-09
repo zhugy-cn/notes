@@ -8,7 +8,19 @@
 </head>
 <body>
 
+
+
   <script>
+  		$data = [];
+		for($i=0; $i<21; $i++) {
+			$data[] = [
+				'name' => 'user_'.$i,
+				'age' => md5($i),
+			];
+		}
+		$userModel = new Test();
+		$res = $userModel->saveAll($data);
+  
 
 	单入口文件：应用程序的所有HTTP请求都由某一个文件接受并由这个文件转发到功能代码中（不同的控制器）
 
@@ -302,11 +314,131 @@
 				4. $res = $db->where(['id'=>1])->setDec('age',4);    自减，默认该字段每次减一,第二个参数是每次减少的数量，返回影响行数
 			
 			5. 数据库删除
-				1. 
-				
-				2. 
+				1. $res = delete(1)
 						
+			6. 其他方法
+			    $res = $db
+				->where('id','>',10)
+				->field('id,name')	// 只显示这两条
+				->order('id desc')	// 排序
+				->limit(3, 5)
+				->page(3,3) 		// 分页
+				->group('`group`')	// 分组
+				->select();
+			
+				
+		9. 模型
+			1. 命名，m_test  ->  Test.php	去掉前缀同名						
+					m_user_info  -> UserInfo.php 
+
+			2. 模型查询
+				-- 获取一条
+				1. $res = Test::get(1);
+				2. $res = $res->name		获取一个字段,name
+				3. $res = $res->toArray()	获取所有字段
+				
+				4. $user = Test::get(function($query){
+						$query->where('name','=','user_6');
+					});
+				5. $user = Test::where('id',10)-> find();
+				
+				-- 获取多条
+				1. $user = Test::all('1,2,3');
+				2. $user = Test::all([4,5,6]);
+				3. $user = Test::where('id','<','5')->select();
+				4. $user = Test::all(function($query){
+						$query->where('id','>',4)->field('id,name');
+					});
+				foreach($user as $val){
+					dump($val->toArray());
+				}
+
+				5. $res = Test::where('id',13)->value('name'); 返回一个字段
+				6. $res = Test::column('age','name');	获取一列，是一个数组
+
+			3. 模型添加数据
+				1.	$res = Test::create([
+						'name' => 'user1',
+						'age' => 55,
+						'demo' => 123
+					],true);	// 字段不存在自动过滤，不传则报错
+
+					$res = Test::create([
+						'name' => 'user1',
+						'age' => 55,
+						'group' => 3,
+						'demo' => 123
+					],['name','group']);  // 只允许添加 name 和 group 这两个字段
+
+					$res = $res->id;	// 获取插入的ID
+
+				2.  $userModel = new Test;
+					$userModel->name = '李四';
+					$userModel->age = '77';
+					$userModel->save();
+					
+					dump($userModel->id);
+				
+				3.  $userModel = new Test();
+					$res = $userModel->save([
+						'name' => '赵六',
+						'age' => md5(21)
+					]);
+					dump($res);	 返回数据库插入的行数，
+
+				4. $userModel->allowField(true)->save	防止报错，自动过滤掉不存在的字段
+				5. $userModel->allowField(['name'])->save	只添加 name 字段
+
+				6. $res = $userModel->saveAll([
+						['age' => 44],
+						['age' => 77],
+					]);
+					foreach($res as $val){
+						dump($val->id);				只获取ID
+						dump($val->toArray());		获取新增的结果集
+					}
+					新增多条
+				
+			4. 更新数据
+				1. $res = Test::update([
+					'id' => 1,		// 数组中存在主键，自动的更新
+					'name' => '李四',
+				]);
+
+				2. $res = Test::update([	
+						'name' => '王五',
+					],['id'=>2]);	// 数组中没有主键，条件写在后面
+				3. $res = Test::update([
+						'name' => '王五',
+					],function($query){
+						$query->where('id','<','5');
+					});
+				
+				4. $res = Test::where('id','<','4')->update([
+						'name' => 18584651
+					]);  返回影响的行数
+
+				5. $userModel = Test::get(1);
+					$userModel -> name = '赵六';	// 已经包含了主键
+					$userModel -> age = 7584;	
+					$res = $userModel->save();	// 自动更新
+					dump($res);		// 返回影响行数
+				
+			5. 删除数据
+				1. $res = Test::destroy(1);	 返回影响行数，传入主键
+
+				2. $res = Test::destroy(function($query){
+						$query->where('id','<',5);
+					});
+				3. $userModel = Test::get(7);
+					$res = $userModel->delete();
+				4. $res = Test::where('id',10)->delete();
+				
+				
+			6. 聚合操作
+				1. 
+
 
   </script>
-</body>
+</body>	
 </html>
