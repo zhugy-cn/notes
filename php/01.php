@@ -101,6 +101,7 @@
 			dump($request->isGet());	是否是GET
 			dump($request->isPost());	是否是POST
 			dump($request->isAjax());	是否是Ajax
+
 		2. 获取参数
 			dump($request->get());			get
 			dump($request->post());			post
@@ -114,12 +115,198 @@
     		dump($request->action());		
 
 	10. input助手函数
-		1. 
 
+	11. 响应对象,Response
+		'default_return_type'    => 'html',	修改返回的类型
+
+	12. 模板视图view曾层, 
+		return view(),默认找当前控制器对应的index.html	view/index/index.html
+		view('upload')	找当前控制器对于的upload.html 	view/index/upload.html
+		view('user/upload')	找 user 对于的upload.html 	view/user/upload.html
+		view('./index.html');	./ 开头就是找public同级目录
+		view('./index.html',[		第二个参数是传递给页面的参数，用 {$name} 接受
+            'name'=> 'jack',
+            'age' => 23
+        ],[
+			'STATIC' => '页面static的替换内容'		页面直接书写	STATIC
+		]);
+		不推荐使用这种方式，第二种方式
+		1. use think\Controller;
+		2. class Index extends Controoler
+		3. return $this->fetch('upload',[
+			'name' => 'jack',
+			'age' => 23
+		])	
+		传递的参数跟view函数一样
+		4. 可以用另一种参数传值
+			$this->assign('test','我是assign传递的值');	使用 {$test} 编译后<?php echo $age; ?>
+		5. 不需要视图页面，直接输出字符串，
+			return $this->display('只是{$name}一个字符串',[
+				'name' => 'age'
+			]);
+
+
+	13. 模板变量输出，赋值替换, 编译后的文件：tp5\runtime\temp\fe291b3c15e4f32955234bc1a2be45ac.php
+	
+		1. 'view_replace_str'       => [],	可以重新配置路径,以下系统提供的
+			__STATIC__		/static
+			__JS__			/static/js
+			__CSS__			/static/css
+
+		2. 页面获取系统变量 $Think
+			{$Think.session.name}	
+			{$Think.cookie.age}
+		
+		3. 执行函数
+			1. {$age | md5 }	前面是变量，后面是函数，中间用 | 分隔
+			2. {$age | substr=0,3}		substr($age, 0, 3) 	 把值作为第一个参数，可以省略###
+			3. {$age} == {$age | date='Y-m-d h',###}	如果要把值作为第二个参数，需要用三个###来占位
+			4. {$age|md5|strtoupper}	执行多个函数
+			5. {$name|default='我是默认的值'}	可以设置默认值
+			
+		4. 模板循环标签
+			1.  {volist name='list' id="item" offset="0" length="3" mod="2" empty="没有数据" key="i"}
+					<p></p>
+					<p></p>
+					<p>{$mod} == {$i} =={$item.name} == {$item.age}</p>
+				{/volist}
+				name: 	php中的变量
+				id: 	变量中的每一项
+				offset: 循环起始值
+				length: 循环结束值
+				mod:	取余
+				empty:	值为空时显示
+				key: 	索引值，从 0 开始
+
+		    2.	{foreach name='list' item='item'}
+					<p>{$item.name} == {$item.age} == {$key}</p>    
+				{/foreach}
+
+		5. 比较标签，name为控制器分配的变量,value为比较的值
+			1. eq,相等时条件成立,
+				{eq name="a" value="10"}
+					<p>条件成立</p>
+				{else/}
+					<p>条件不成立</p>
+				{/eq} 
+			2. neq,不等时条件成立
+				{neq name="a" value="10"}
+					<p>条件成立</p>
+				{else/}
+					<p>条件不成立</p>
+				{/neq}
+			3. gt,变量大于值时成立
+				{gt name="a" value="$b"}
+					<p>条件成立</p>
+				{else/}
+					<p>条件不成立</p>
+				{/gt}	
+			4. lt, 变量小于值时成立
+			5. egt, 大于等于
+			6. elt, 小于等于
+		
+		6. 条件判断标签
+			1. switch
+				{switch name="Think.get.type"}
+					{case value="0|1"} <p>普通的会员</p> {/case}	相同结果时，0 和 1 输出的都是普通的会员， | 
+					{case value="2"} <p>铜牌的会员</p> {/case}
+					{case value="3"} <p>黄金的会员</p> {/case}
+					{default /} <p>游客</p>
+				{/switch}
+
+			2. range
+				{range name="Think.get.type" value="1,2,3" type="in"}
+					<p>当前type是1，2，3中的一个</p>
+				{else/}
+					<p>当前type不是1，2，3中的一个</p>
+				{/range}
+				当type为 in 时，判断value的值是否包含有name的值
+				当type为 notin 时则相反
+				当type为 between ，判断name的值是否存在于value的值区间  1到10，包含启示值和结束值
+				当type为 notbetween 则相反，起始值和结束值不会包含
+			
+			3. if
+				{if condition="($Think.get.type) === 1 AND $age == 1"}
+					<p>正确</p>
+				{else /}
+					<p>不正确</p>
+				{/if}
+
+		7. 模板布局，包含，继承
+			1. 模板的引入
+				{include file="common/header" /}
+
+			2. 页面的继承
+				{extend name="common/base" /}
+
+			3. 继承模板时显示不同的内容，名字相同的替换
+				1. 父模板 	{block name="title"} 公共头部的标题 {/block}
+				2. 子模板	{block name="title"} 我是page1的标题 {/block}
+				3. 连接原来的内容 {__block__} 获取基础模板的默认值
+				{block name="title"}
+					连接上原来的值 {__block__}
+				{/block}
+
+			4. 使用 layout 
+				1. 配置文件template添加两个配置，
+					'template' = [
+						'layout_on'    => 'true',
+						'layout_name'  => 'layout',
+					]
+				2. view 下 新建 layout.html 文件
+
+				3. 需要替换的地方，{__CONTENT__}
+
+
+
+		8. 数据库操作
+			1. 数据库链接,只有使用时才链接
+				1. 配置文件链接,不需要家key值，database
+					use think\Db;
+					$res = Db::connect();
+				2. DSN 方式链接，
+					Db::connect('mysql://root:root@127.0.0.1:3306/study#utf8');
+			2. 数据库查询
+
+				1. $res = Db::table('m_user')->where(['id' => 10])->select();			查询全部，是一个二维数组,结果不存在返回空数组
+
+				2. $res = Db::table('m_user')->where(['id' => 10])->find();				返回一条记录，是一个一维数组，结果不存在返回 NULL
+
+				3. $res = Db::table('m_user')->where(['id' => 10])->value('name');		返回一条记录某个字段的值，结果不存在返回 NULL
+
+				4. $res = Db::table('m_user')->column('name','age');		返回一条数组，数组中的值就是列的值,如果传入两个值，第二个值为key
+
+				5. $res = Db::name('user')->select();	name 可以省略数据库的前缀
+
+				6. $res = db('user')->select();		助手函数，每次都实例化类，第三个参数false就不会了, db('user',[],false)
+
+				2. $res = Db::query('select * from m_user where id=?',[1]);
+
+			3. 数据库插入，$db = Db::name('user');
+				1. $res = Db::execute('insert into m_user set name=?,age=?',['jack',23]);
+					
+				2. $res = $db->insert(['name'=> '张三','age' => md5(11111)]);	返回影响行数
+
+				3. $res = $db->insertGetId(['name'=> '张三','age' => md5(11111)]);   返回插入的 ID
+
+				4. $res = $db->insertAll($data)		多条数据插入，$data是一个二维数组，返回插入的行数
+					
+
+			4. 数据库更新，$db = Db::name('user');
+				1. $res = $db->where(['id'=>1])->update(['name'=>'1858551', 'age'=>22222]);		返回影响行数
+
+				2. $res = $db->where(['id'=>2])->setField(['age'=>457564]);		只更新一个字段，返回影响行数
+
+				3. $res = $db->where(['id'=>1])->setInc('age',4);    自增，默认该字段每次增一,第二个参数是每次增加的数量，返回影响行数
+
+				4. $res = $db->where(['id'=>1])->setDec('age',4);    自减，默认该字段每次减一,第二个参数是每次减少的数量，返回影响行数
+			
+			5. 数据库删除
+				1. 
+				
+				2. 
+						
 
   </script>
 </body>
 </html>
-
-
-
