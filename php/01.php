@@ -327,34 +327,53 @@
 				->select();
 			
 				
-		9. 模型
-			1. 命名，m_test  ->  Test.php	去掉前缀同名						
-					m_user_info  -> UserInfo.php 
+		9. 模型，
+			1. 定义模型，与表对应
+				命名，m_test  ->  Test.php	去掉前缀同名						
+					m_user_info  -> UserInfo.php 下划线后面转大写
 
 			2. 模型查询
 				-- 获取一条
+				一。
 				1. $res = Test::get(1);
 				2. $res = $res->name		获取一个字段,name
 				3. $res = $res->toArray()	获取所有字段
-				
+					
+			助手函数 model('Test')
+				$test = model('Test');
+				$res = $test::get(8);
+				$res = $res -> toArray();
+
+
+				二。传入 query 构造查询条件
 				4. $user = Test::get(function($query){
 						$query->where('name','=','user_6');
 					});
 				5. $user = Test::where('id',10)-> find();
 				
 				-- 获取多条
-				1. $user = Test::all('1,2,3');
+				1. $user = Test::all('1,2,3');	传入主键
 				2. $user = Test::all([4,5,6]);
 				3. $user = Test::where('id','<','5')->select();
 				4. $user = Test::all(function($query){
 						$query->where('id','>',4)->field('id,name');
 					});
+
+				需要遍历
 				foreach($user as $val){
 					dump($val->toArray());
 				}
 
 				5. $res = Test::where('id',13)->value('name'); 返回一个字段
 				6. $res = Test::column('age','name');	获取一列，是一个数组
+
+				获取一条	get()  find()
+
+				获取多条	all()	select()
+
+				获取单个字段	value()
+				
+				
 
 			3. 模型添加数据
 				1.	$res = Test::create([
@@ -399,6 +418,10 @@
 					}
 					新增多条
 				
+				
+				
+
+
 			4. 更新数据
 				1. $res = Test::update([
 					'id' => 1,		// 数组中存在主键，自动的更新

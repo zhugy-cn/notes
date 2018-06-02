@@ -105,7 +105,7 @@ Should we run `npm install` for you after the project has been created? (recomme
 
     vue-router 使用步骤
         1, 安装模块          cnpm install vue-router --save
-        2, 映入模块          import VueRouter from 'vue-router'
+        2, 引入模块          import VueRouter from 'vue-router'
         3, 作为Vue的插件     Vue.use(VueRouter)
         4, 创建路由实例对象：
             new VueRouter({
@@ -227,3 +227,23 @@ Should we run `npm install` for you after the project has been created? (recomme
         to:   要进入的目标路由对象  到哪里去
         from:  离开导航的路由对象   从哪里来
         next:  用来决定跳转或者取消导航
+
+
+
+
+        三。 vue-cli 配置 scss： 
+        1. 安装loader： 
+            cnpm install node-sass --save-dev
+            cnpm install sass-loader --save-dev
+        2.webpack.base.config.js在loaders里面加上配置
+            { 
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
+            }
+        3.用scss的地方写上lang="scss"，<style lang="scss" scoped="" type="text/css"></style>
+
+
+        四。引入stylus编写css
+        1.安装stylus,stylus-loader
+            cnpm install stylus --save-dev
+            cnpm install stylus-loader --save-dev

@@ -163,4 +163,67 @@
             from:   正要离开导航的路由对象，从哪里来
             next:   用来决定跳转或取消导航
         
-    ·
+    
+            六： 重定向和别名
+            1.redirect: 重定向，当访问 /name 路由时，URL 将会被替换成 /home，然后匹配路由为 /home
+                1.1 {path: '/name', redirect: '/home'}   根据路径匹配
+                1.2 {path: '/name', redirect: '{path: /home}'}  也是根据路径匹配
+                1.3 {path: '/name', redirect: '{name: home}'}   根据路由名字来匹配
+                1.4 {path: '/name', redirect: (to)=>{}}   函数写法
+            2.alias: 别名
+                2.1 alias: '/index', 
+            3.404页面
+            to 参数是一个包含当前URL信息的对象，可以根据输入的URL来重定向不同的页面
+            {path: '*',redirect:(to)=>{     
+                if(to.path === '/home'){
+                    // return '/name';
+                    return {path: '/name'};
+                }else {
+                    return {name: 'about'}
+                }
+            }}
+    
+            七。 嵌套路由
+                7.1  新建子路由模板文件，在router配置文件中引入
+                    import left from '@/componnets/left'
+                    import right from '@/componnets/right'
+                7.2  父路由添加一个children属性，是一个数组 children: [],里面配置着子路由的信息
+                    children:[
+                        {path:'', component:left},  path 为空说明进入父路由时默认渲染这个子路由
+                        {path:'right', component:right} 前面不能写斜杠，因为斜杠是匹配根路径
+                    ]
+                7.3  父路由模板里面书写router-link标签来导航，书写router-view标签来渲染匹配到的组件
+                    <router-link to="/demo2/left">左边子路由</router-link>
+                    <router-link to="/demo2/right">右边子路由</router-link>
+                    <router-view></router-view>     视图呈现处
+                7.4  默认渲染某个子路由
+                    1.默认不渲染任何子路由，要想渲染子路由需要把子路由的path设置为空，
+                        {path:'', component:left},
+                    2.并且还需要在router-link标签里面修改to属性与父路由一样，添加exact精准匹配，这样才能激活导航，添加类名，显示高亮
+                        <router-link exact to="/demo2">   改变前 to="/demo2/left"
+                    3.如果设置了默认的子路由，那么就需要把父路由的name属性给到默认的子路由身上，否则会报错
+                        {path:'', component:left, name:"demo2"}
+                    4.路由嵌套过多时，可以把to属性改成对象方式
+                        :to="{name:'left'}"   对比之前：to="/demo2/left"
+                    5.如果不想在地址栏看见层级的父元素，可以在path前面加上 / ,这时候就是根据根目录来匹配，但是link标签必须是以name方式来匹配路由，否则就会报错
+                        {path:'/right'}       对比之前：{path:'right'} 
+                        注意这是router-link标签里面的to属性必须是以name来匹配路由的
+                        :to="{name:'right'}"  对比之前：to="/demo2/right"
+                        这时候访问的地址栏就变成了 "/right"  对比之前："/demo2/right",没有了嵌套关系
+                    6.总结：默认子路由的router-link标签的 to 属性跟父路由的设置成一样，并且设置 exact 精准匹配来点亮类名，
+                    要想地址栏看不到路由层级关系，就把子路由的router-link标签绑定为name匹配，并在路由路径设置前面加上 '/'
+            
+            
+            八。 命名视图，一个组件两个同级视图
+                8.1. 页面添加一个router-view标签，并在标签上添加一个name属性
+                    <router-view name="slider" class="bottom"></router-view>
+                8.2. 新建组件并在路由配置文件中引入
+                    import nav from '@/demo-3/nav'
+                8.3 在路由配置中将component改成components:{},并在components里面配置，
+                    components: {
+                        default: demo3,     默认显示的组件
+                        slider: nav         前面的slider是view标签上的name属性值，后面的nav是引入的组件
+                    }
+                    对比之前：component: demo3
+                8.4. 这时会将 demo3 组件渲染到没有name属性的view标签上，把nav组件渲染到name属性为slider的view标签上
+            
