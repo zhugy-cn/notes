@@ -1,5 +1,13 @@
 <?php 
 
+
+	microsoft	
+		860185538@qq.com
+		birthday19950825
+
+
+
+
 	淘宝镜像：npm install -g cnpm --registry=https://registry.npm.taobao.org
 	
 	git官网	https://git-scm.com/download
@@ -65,3 +73,12 @@
 	php建设在Apache上，而node不用建设在任何的服务器软件上，没有根目录
 
 	顶级路由
+
+
+
+	安装  cnpm install -g live-server  自动刷新
+
+	启动 live-server
+
+
+	npm install -g browser-sync   自动刷新

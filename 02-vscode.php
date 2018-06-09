@@ -27,8 +27,6 @@
 
         Image Preview               // 鼠标移到路径里显示图像预览
 
-        Indenticator                // 突出目前的缩进深度
-
         JavaScript(ES6) code snippets      // es6代码片段
 
         JavaScript Snippet Pack             // js代码片段
@@ -39,13 +37,36 @@
 
         Path Intellisense           // 路径自动补全
 
+        Dracula Official            // 主题
+
+        background                  // 背景图片
+
+        【vue插件】
+        
         vetur                       // 语法高亮、智能感知
 
         VueHelper                   // vue代码片段
 
-        Dracula Official            // 主题
+        Vue VSCode Snippets         // vue 模板
 
-        background                  // 背景图片
+        eslint                      // 代码格式检查
+
+
+        vue 格式化
+        "prettier.tabWidth": 4,
+        "vetur.format.defaultFormatter.html": "prettier"
+        
+
+        最近更新了vscode，发现格式化代码时给stylus语法代码加上了大括号，冒号、分号等,这样其实很不方便stylus的修改
+        "stylusSupremacy.insertColons": false, // 是否插入冒号
+        "stylusSupremacy.insertSemicolons": false, // 是否插入分好
+        "stylusSupremacy.insertBraces": false, // 是否插入大括号
+        "stylusSupremacy.insertNewLineAroundImports": false, // import之后是否换行
+        "stylusSupremacy.insertNewLineAroundBlocks": false // 两个选择器中是否换行
+        解决js单引号自动转换成双引号：
+        "prettier.semi": false,
+        "prettier.singleQuote": true
+        
     </script>
 
 </body>
