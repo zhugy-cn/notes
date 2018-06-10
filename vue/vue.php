@@ -66,7 +66,7 @@
 
             9. updated          数据被更新后
 
-        v-html  v-text
+        
 
 
         computed: 计算属性，需要return
@@ -101,6 +101,10 @@
             3. :style="styObj"              styObj是绑定在data里的对象
 
             4. ：style="[styObj, {fontSize: '20px'}]"
+
+        v-html  v-text  v-show  v-cloak   v-once
+
+        .number .trime .lazy
 
         条件渲染：
             v-show=true 显示,display=none
@@ -137,6 +141,8 @@
                 3. 在组件上加 ref 获取的是组件的引用
 
             注册局部组件: components: {demo}
+
+            extens $parent
 
         单项数据流
             子组件只能使用父组件传递的值，不能直接修改，因为如果传递的是引用类型而刚好其他的子组件也使用的话会影响其他子组件的值
@@ -184,7 +190,96 @@
         .vue    单文件组件
 
 
+        组件    
+            返回一个对象  Comp
+
+            不是 new Vue 出来的组件，data是一个函数，返回一个对象，不能返回一个全局的对象
+
+        插槽-------------
+            子组件: Test
+                <div>
+                    <slot></slot>
+                </div>
+            父组件: 使用：
+                <Test>
+                    这里的内容会替换 slot{{value}},这里的值是父组件的
+                </Test>
+
         
+        具名插槽,多个插槽，用 name 来区分
+            子组件
+                <div>
+                    <div class="header">
+                        <slot name="head"></slot>
+                    </div>
+                    <div class="footer">
+                        <slot name="foot"></slot>
+                    </div>
+                </div>
+
+            父组件使用
+                <Test>
+                    <div slot="head">替换name="head"的插槽</div>
+                    <div slot="foot">替换name="foot"的插槽</div>
+                </Test>
+        
+        插槽使用的{{value}}是父组件的值，要想使用子组件的值
+        作用域插槽
+            子组件：
+                <div>
+                    <slot value="123" item="abc"></slot>
+                </div>
+            父组件使用,数据都放在 props 里面
+                <Test>
+                    <div slot-scope="props">{{props.value}} {{props.item}} 也可以调用父组件的数据{{value}}</div>
+                </Test>
+
+        给组件添加 ref ，  
+
+        render 方法,渲染组件
+            组件: 
+            `
+            <comp-one ref='comp'>
+                <span ref='span'>{{value}}</span>
+            </comp-one>
+            `
+            
+            template会被编译成，渲染步骤,$this.$createElement
+            render(createElement) {
+                return createElement('comp-one', {
+                    ref: 'comp'
+                },[
+                    // 子节点
+                    createElement('span', {
+                        ref: 'span',
+                    },this.value)
+                ])
+            }
+
+            render(createElement) {
+                return createElement('comp-one', {
+                    ref: 'comp',
+                    props: {
+                        props1: this.value
+                    },
+                    on: {
+                        click: () => {
+                            this.$emit('click')
+                        }
+                    }
+                },[
+                    // 子节点
+                    createElement('span', {
+                        ref: 'span',
+                    }, [
+                        this.value,
+                        this.props1,
+                    ])
+                ])
+            }
+
+        
+
     </script>
 </body>
 </html>

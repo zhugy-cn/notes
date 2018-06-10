@@ -34,6 +34,20 @@
 
         2. linkActiveClass: 'is-active',   全局设置路由被激活的类名，默认router-link-active
 
+        linkExactActiveClass
+
+        scrollBehavior(to, from, saveedPosition) {
+            if(saveedPosition){
+                return saveedPosition
+            }else{
+                return {x:0, y:0}
+            }
+        }
+
+        porps: true 直接传给组件的props,不需要路由获取
+
+        
+
         3. active-class="active-class"  设置单个路由被激活的类名
 
         4. tag='li' 把router-link渲染成li标签，默认是 A 标签
@@ -49,6 +63,7 @@
         9. 当把router-link的tag设置成li后，为了能看见路由，可以嵌套一个什么属性都不加的A标签，这样路由信息就会显示在A标签上
 
         10. 当路由层次嵌套过深时，可以用name来匹配路由， to='/about/hobby' -> :to='{name:"hobby"}'
+
 
         11. this.$route 当前激活的路由信息对象，每个组件实例都会有
             fullPath    全路径
@@ -152,12 +167,22 @@
             单个路由
             组件中
         
-        2. 钩子函数
-            router实例上:   beforeEach(进入导航之前)、afterEach(进入导航之后，改变当前title)
+        2. 钩子函数 
+                            
+            router实例上:   beforeEach(进入导航之前)、beforeResolve()、afterEach(进入导航之后，改变当前title)   进行数据的校验，权限控制
             单个路由中:     beforeEnter(进入导航之前)
             组件内的钩子:   beforeRouteEnter(进入组件之前)、beforeRouteUpdate(子导航切换时执行)、beforeRouteLeave(离开组件之前)
         路由钩子函数比组件钩子函数先执行，要想在路由钩子函数中改变数据，需要在next函数中传一个回调函数，参数就是当前的Vue实例
 
+        next(vm=>{
+            console.log(拿到Vue实例)
+            vm.text
+        })
+
+        异步路由
+            component: () => import(组件的路径)
+        
+        
         3. 钩子函数接受的参数
             to:     要进入的目路由对象，到哪里去
             from:   正要离开导航的路由对象，从哪里来
