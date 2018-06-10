@@ -3,6 +3,16 @@
 <?php
 
 
+$ npm install --global vue-cli      # 全局安装 vue-cli
+
+$ vue init webpack my-project      # 创建一个基于 webpack 模板的新项目
+
+$ cd my-project
+
+npm install  # 安装依赖，走你
+
+$ npm run dev
+
 
 Project name vuedemo                项目名称
 
