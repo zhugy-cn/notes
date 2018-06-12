@@ -463,12 +463,14 @@
 
 
 			
-			模板布局
-					
+			参数的获取，
+				写在函数里面的不管是什么方式都能获取，但是不传的话就会报错
+				$post = input('post.');     // 只获取 Body 里面的数据
+				$get = input('get.');       // 只获取 ? 后面的键值对
+				$route = input('route.');   // 只获取路由后面的数据   /:id
+				$param = input('param.');   // 获取全部
 
-			模板继承
-
-
+				
 
   </script>
 </body>	
