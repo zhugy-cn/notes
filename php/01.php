@@ -470,7 +470,36 @@
 				$route = input('route.');   // 只获取路由后面的数据   /:id
 				$param = input('param.');   // 获取全部
 
-				
+			
+				// 显示属性
+				protected $visible = ['id'];	只显示ID
+				// 隐藏属性
+				protected $hidden = ['id'];		只隐藏ID
+
+
+
+
+			一、一对一
+				主键在关联表，本身包含外键
+											关联表		当前表外键	关联表主键
+					return $this->belongsTo('Image', 'topic_img_id', 'id');
+
+				主键在本表，外键在关联表
+										  关联表  关联表外键  当前表主键
+					return $this->hasOne('Image', 'img_id', 'id');
+
+			二、一对多
+											关联表       关联表外键   当前表主键
+					return $this->hasMany('BannerItem', 'banner_id', 'id');
+			
+
+			三、多对多
+												 关联表		  中间表		 关联表ID	  当前表ID
+					return $this->belongsToMany('Product','theme_product','product_id','theme_id';
+
+			关联
+			$result = ThemeModel::with(['topImg', 'headImg'])->select($ids);    //  with 定义的函数名
+
 
   </script>
 </body>	
