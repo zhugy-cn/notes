@@ -463,10 +463,8 @@
 
 
 			
-			模板布局
-					
-
-			模板继承
+            隐藏 index.php，加个问号
+               RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
 
 
 
