@@ -463,6 +463,10 @@
 
 
 			
+            隐藏 index.php，加个问号
+			   RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
+			   
+			   
 			参数的获取，
 				写在函数里面的不管是什么方式都能获取，但是不传的话就会报错
 				$post = input('post.');     // 只获取 Body 里面的数据
