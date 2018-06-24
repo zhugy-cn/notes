@@ -505,6 +505,14 @@
 			$result = ThemeModel::with(['topImg', 'headImg'])->select($ids);    //  with 定义的函数名
 
 
+			当前接口隐藏字段 summary
+				$result = ProductModel::getMostRecent($count);
+				if (!$result) {
+					throw new ProductException();
+				}
+				$collection = collection($result);
+				$result = $collection->hidden(['summary']);
+
   </script>
 </body>	
 </html>
