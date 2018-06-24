@@ -11,6 +11,8 @@ msysgit是Windows版的Git:  下载地址：https://git-for-windows.github.io
         
     2. git config --global user.email "860185538@qq.com"           # 邮箱
 
+    git config --list               # 查看全局设置
+
     3. ls ~/.ssh/id_rsa.pub                            # 检测是否存在 key,弹出路径
     
     4. ssh-keygen -t rsa -C "860185538@qq.com"         # 生成秘钥，连续3个回车,id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人，
@@ -153,7 +155,6 @@ msysgit是Windows版的Git:  下载地址：https://git-for-windows.github.io
 
     touch .gitignore                # 创建过滤文件夹（mkdir）
 
-    git config --list               # 查看全局设置
 
     git checkout --index.html       # 撤销单个文件更改
 
