@@ -7,7 +7,7 @@ msysgit是Windows版的Git:  下载地址：https://git-for-windows.github.io
 图形工具：https://www.sourcetreeapp.com/    sourcetree
     
     git 的初始
-    1. git config --global user.name "zhuGuangYong"                  # 用户名
+    1. git config --global user.name "ZhuGuangYong"                  # 用户名
         
     2. git config --global user.email "860185538@qq.com"           # 邮箱
 
