@@ -72,8 +72,10 @@ msysgit是Windows版的Git:  下载地址：https://git-for-windows.github.io
 
     3. git commit -m '描述内容'        # 提交到本地仓库
 
-    4. git remote add origin git@gitee.com:zhugy-cn/toolUse.git        # 将本地仓库连接到远程仓库地址，给远程仓库起了个别名，叫origin
+    4. git remote add origin git@gitee.com:zhugy-cn/'远程名字（tool-class.git）'        # 将本地仓库连接到远程仓库地址，给远程仓库起了个别名，叫origin
 
+    5. git push -u origin master
+    
     5. git pull origin master --allow-unrelated-histories
 
     6. git push --set-upstream origin master

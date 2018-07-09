@@ -37,14 +37,25 @@
 
         VueHelper                   // vue代码片段
 
+        Vue VSCode Snippets         // vue代码片段
+
+
+        
+
+
+
         {
             "editor.fontSize": 15,
             "workbench.iconTheme": "material-icon-theme",
             "prettier.tabWidth": 4,
             "prettier.singleQuote": true
+            "vetur.format.defaultFormatter.html": "prettier",
         }
     </script>
+    
 
 </body>
+
+
 
 </html>

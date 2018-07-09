@@ -243,7 +243,7 @@ Should we run `npm install` for you after the project has been created? (recomme
 
         三。 vue-cli 配置 scss： 
         1. 安装loader： 
-            cnpm install node-sass --save-dev
+            cnpm install node-sass sass-loader --save-dev
             cnpm install sass-loader --save-dev
         2.webpack.base.config.js在loaders里面加上配置
             { 
@@ -253,6 +253,9 @@ Should we run `npm install` for you after the project has been created? (recomme
         3.用scss的地方写上lang="scss"，<style lang="scss" scoped="" type="text/css"></style>
 
 
+        npm install --save normalize.css
+        
+        
         四。引入stylus编写css
         1.安装stylus,stylus-loader
             cnpm install stylus --save-dev
