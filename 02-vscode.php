@@ -52,7 +52,7 @@
             "editor.fontSize": 15,
             "workbench.iconTheme": "material-icon-theme",
             "prettier.tabWidth": 4,
-            "prettier.singleQuote": true
+            "prettier.singleQuote": true,
             "vetur.format.defaultFormatter.html": "prettier",
         }
     </script>
