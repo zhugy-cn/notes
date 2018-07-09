@@ -6,7 +6,7 @@
 		birthday19950825
 
 
-
+	解决办法：删除C:\Users\用户名\.npmrc + 重新启动
 
 	淘宝镜像：npm install -g cnpm --registry=https://registry.npm.taobao.org
 	

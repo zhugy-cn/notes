@@ -513,6 +513,10 @@
 				$collection = collection($result);
 				$result = $collection->hidden(['summary']);
 
+
+			有 v1 层级时用 点 来访问 v1.user
+			admin.com/api/v1.user/index
+
   </script>
 </body>	
 </html>

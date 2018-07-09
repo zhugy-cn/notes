@@ -243,7 +243,14 @@ Should we run `npm install` for you after the project has been created? (recomme
 
         三。 vue-cli 配置 scss： 
         1. 安装loader： 
+<<<<<<< HEAD
             cnpm install node-sass sass-loader --save-dev
+=======
+            npm install node-sass  --save-dev
+
+            npm install sass-loader --save-dev
+ 
+>>>>>>> 478487c4f46cff37037941501fe81ac72495a520
         2.webpack.base.config.js在loaders里面加上配置
             { 
                 test: /\.scss$/,
@@ -252,12 +259,23 @@ Should we run `npm install` for you after the project has been created? (recomme
         3.用scss的地方写上lang="scss"，<style lang="scss" scoped="" type="text/css"></style>
 
 
+        npm i svg-sprite-loader -D
+
+        npm i normalize.css -S
+        
+        npm i js-cookie -S
+
+        npm i element-ui -S
+
+        npm i axios -S
+        
         四。引入stylus编写css
         1.安装stylus,stylus-loader
             cnpm install stylus --save-dev
             cnpm install stylus-loader --save-dev
 
 
+<<<<<<< HEAD
         element-ui按需引入
 
             npm install babel-plugin-component -D 
@@ -268,3 +286,20 @@ Should we run `npm install` for you after the project has been created? (recomme
         icon 图标
 
         npm i svg-sprite-loader -D
+=======
+        五，解决跨域问题
+
+        proxyTable: {
+            '/api': {  //使用"/api"来代替"http://f.apiplus.c" 
+              target: 'http://test.com/', //源地址 
+              changeOrigin: true, //改变源 
+              pathRewrite: {
+                '^/api': 'http://test.com/' //路径重写 
+              }
+            }
+          },
+
+          axios.get('api/test').then(res => {
+            console.log(res);
+        });
+>>>>>>> 478487c4f46cff37037941501fe81ac72495a520
