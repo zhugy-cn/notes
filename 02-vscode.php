@@ -36,6 +36,10 @@
         vetur                       // 语法高亮、智能感知
 
         VueHelper                   // vue代码片段
+        
+        JavaScript (ES6) code snippets      // es6代码片段
+
+        JavaScript Snippet Pack             // js代码片段
 
         Vue VSCode Snippets         // vue代码片段
 
