@@ -61,15 +61,12 @@
                 {
                     test: /\.svg$/,
                     loader: 'svg-sprite-loader',
-                    include: [resolve('scr/icons')],
-                    options: {
-                    symbolId: 'icon-[name]'
-                    }
+                    include: [resolve('src/icons')],
                 },
                 {
                     test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                     loader: 'url-loader',
-                    exclude: [resolve('scr/icons')],
+                    exclude: [resolve('src/icons')],
                     options: {
                     limit: 10000,
                     name: utils.assetsPath('img/[name].[hash:7].[ext]')
