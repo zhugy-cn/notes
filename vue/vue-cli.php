@@ -243,14 +243,9 @@ Should we run `npm install` for you after the project has been created? (recomme
 
         三。 vue-cli 配置 scss： 
         1. 安装loader： 
-<<<<<<< HEAD
-            cnpm install node-sass sass-loader --save-dev
-=======
+            npm install sass-loader --save-dev
             npm install node-sass  --save-dev
 
-            npm install sass-loader --save-dev
- 
->>>>>>> 478487c4f46cff37037941501fe81ac72495a520
         2.webpack.base.config.js在loaders里面加上配置
             { 
                 test: /\.scss$/,
@@ -259,15 +254,25 @@ Should we run `npm install` for you after the project has been created? (recomme
         3.用scss的地方写上lang="scss"，<style lang="scss" scoped="" type="text/css"></style>
 
 
-        npm i svg-sprite-loader -D
+        npm install sass-loader --save-dev
 
-        npm i normalize.css -S
+        npm install node-sass  --save-dev
+
+        npm install svg-sprite-loader --save-dev
+
+        npm install normalize.css --save
         
-        npm i js-cookie -S
+        npm install js-cookie --save
 
-        npm i element-ui -S
+        npm install element-ui --save
 
-        npm i axios -S
+        npm install axios --save
+        
+        npm install vuex --save
+
+        npm install nprogress --save
+
+
         
         四。引入stylus编写css
         1.安装stylus,stylus-loader
@@ -275,7 +280,6 @@ Should we run `npm install` for you after the project has been created? (recomme
             cnpm install stylus-loader --save-dev
 
 
-<<<<<<< HEAD
         element-ui按需引入
 
             npm install babel-plugin-component -D 
@@ -286,7 +290,6 @@ Should we run `npm install` for you after the project has been created? (recomme
         icon 图标
 
         npm i svg-sprite-loader -D
-=======
         五，解决跨域问题
 
         proxyTable: {
@@ -302,4 +305,3 @@ Should we run `npm install` for you after the project has been created? (recomme
           axios.get('api/test').then(res => {
             console.log(res);
         });
->>>>>>> 478487c4f46cff37037941501fe81ac72495a520

@@ -97,7 +97,7 @@
 
         mutations: 不能处理异步, 第一个参数是 state 数据
         
-        actions: 可以处理异步， 第一个参数就是整个 store, Action 提交的是 mutation，而不是直接变更状态。
+        actions: 可以处理异步， 第一个参数就是整个 store, Action 提交的是 mutation，而不是直接变更状态。只有两个参数
 
         this.$store.commit('add', ++i);     用来提交 mutations，
 
