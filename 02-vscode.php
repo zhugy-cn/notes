@@ -55,8 +55,36 @@
             "prettier.singleQuote": true,
             "vetur.format.defaultFormatter.html": "prettier",
         }
+
+
+            文件 -> 首选项 -> 用户代码片段
+            "Print to console": {
+                "prefix": "vb",
+                "body": [
+                    "<template>",
+                    "\t<div>",
+                    "\t\t$1",
+                    "\t</div>",
+                    "</template>",
+                    "<script>",
+                    "export default {",
+                    "\tname: '$2',",
+                    "\tdata() {",
+                    "\t\treturn {",
+                    "\t\t};",
+                    "\t}",
+                    "};",
+                    "</script>",
+                    "<style>",
+                    "</style>",
+                ],
+                "description": "vue 初始化"
+            }
     </script>
     
+
+
+
 
 </body>
 

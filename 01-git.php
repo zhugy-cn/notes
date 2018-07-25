@@ -6,6 +6,21 @@ msysgit是Windows版的Git:  下载地址：https://git-for-windows.github.io
 
 图形工具：https://www.sourcetreeapp.com/    sourcetree
     
+
+
+
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git remote add origin git@github.com:zhugy-cn/vue-admin-template.git
+    git push -u origin master
+
+
+    git remote add origin git@github.com:zhugy-cn/vue-admin-template.git
+    git push -u origin master
+    
+
+
     git 的初始
     1. git config --global user.name "ZhuGuangYong"                  # 用户名
         
