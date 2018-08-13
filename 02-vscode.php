@@ -54,6 +54,10 @@
             "prettier.tabWidth": 4,
             "prettier.singleQuote": true,
             "vetur.format.defaultFormatter.html": "prettier",
+            // apicloud
+            "apicloud.port": "1995",
+            "apicloud.start_wifi": true,
+            "apicloud.subdirectories": "/widget"
         }
 
 
