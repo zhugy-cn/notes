@@ -43,7 +43,9 @@
 
         Vue VSCode Snippets         // vue代码片段
 
+        cssrem                      // px 转rem
 
+        Document This               // ctrl + alt + d
         
 
 

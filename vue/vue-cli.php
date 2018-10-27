@@ -273,6 +273,14 @@ Should we run `npm install` for you after the project has been created? (recomme
         npm install nprogress --save
 
 
+        npm install --save-dev px2rem-exclude
+
+        npm install --save lib-flexible
+
+        npm install babel-plugin-import --save-dev      npm i babel-plugin-import -D
+
+        npm install vant --save     npm i vant -S
+
         
         四。引入stylus编写css
         1.安装stylus,stylus-loader
