@@ -40,6 +40,9 @@ cnpm install vue-awesome-swiper@2.6.7 --save
 
   <keep-alive>  把路由中的内容放到内存中，下次直接从内存拿出来
 
+  // "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+  // "start": "npm run dev",
+
 IP地址被访问
   "dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js",
   

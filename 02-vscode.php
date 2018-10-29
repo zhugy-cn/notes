@@ -43,7 +43,9 @@
 
         Vue VSCode Snippets         // vue代码片段
 
+        cssrem                      // px 转rem
 
+        Document This               // ctrl + alt + d
         
 
 
@@ -83,6 +85,17 @@
                     "</style>",
                 ],
                 "description": "vue 初始化"
+            }
+
+            "Print to console": {
+                "prefix": "then",
+                "body": [
+                    ".then(res => {"
+                        "\tconsole.log(res)"
+                    "})"
+                    ".catch(()=>{})"  
+                ],
+                "description": "promise"
             }
     </script>
     

@@ -264,14 +264,31 @@ Should we run `npm install` for you after the project has been created? (recomme
         
         npm install js-cookie --save
 
-        npm install element-ui --save
-
         npm install axios --save
         
         npm install vuex --save
 
+        
+
+        
+        // 移动端 vant-ui
+        npm install --save-dev px2rem-exclude
+
+        npm install --save lib-flexible
+
+        npm install babel-plugin-import --save-dev      npm i babel-plugin-import -D
+
+        npm install vant --save     npm i vant -S
+
+
+        // PC端 element-ui
+
         npm install nprogress --save
 
+        npm install element-ui --save
+
+        npm install babel-plugin-component -D
+        
 
         
         四。引入stylus编写css

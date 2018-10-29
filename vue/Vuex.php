@@ -158,7 +158,8 @@
             }),
         }
 
-        使用mutation
+        使用mutation, 当前模块的 store
+        
         mounted() {
             let i = 10
             this.addAge(i+=10);
@@ -201,3 +202,88 @@
             }
         }
 
+
+
+        // 设置 namespaced: true,
+        // 第一种
+        mounted() {
+            console.log(this.test);
+            this['agent/SET_TEST']('mutations')
+            this['agent/set_test_actions']('actions')
+        },
+        computed: {
+            ...mapState({
+                test: state => state.agent.test
+            })
+        },
+        methods: {
+            ...mapActions(['agent/set_test_actions']),
+            ...mapMutations(['agent/SET_TEST']),
+        }
+
+        // 第二种
+        mounted() {
+            console.log(this.test);
+            this.SET_TEST('mutations2')
+            this.set_test_actions('actions2')
+        },
+        computed: {
+            ...mapState('agent', {
+                test: state => state.test
+            })
+        },
+        methods: {
+            ...mapMutations('agent', [
+                'SET_TEST'
+            ]),
+            ...mapActions('agent', [
+                'set_test_actions'
+            ]),
+        }
+
+        // 第三种
+
+        import { createNamespacedHelpers } from 'vuex'
+        const { mapState, mapActions, mapMutations } = createNamespacedHelpers('agent')
+        mounted() {
+            console.log(this.test);
+            this.SET_TEST('mutations3')
+            this.set_test_actions('actions3')
+        },
+        computed: {
+            ...mapState({
+                test: state => state.test
+            })
+        },
+        methods: {
+            ...mapMutations([
+                'SET_TEST'
+            ]),
+            ...mapActions([
+                'set_test_actions'
+            ]),
+        }
+
+        // 又需要访问根方法时
+        this.SET_TEST(222)
+        this.testRoot(111)
+        ...mapMutations(['testRoot']),  // 根方法
+        ...mapMutations('agent', [  // 模块方法
+            'SET_TEST'
+        ]),
+
+
+        // vuex 值的拷贝，不改变 vuex 的值
+        watch: {
+            test: {
+                handler() {
+                    // 引用类型
+                    this.age = {
+                        ...this.test
+                    }
+                    // 值类型
+                    this.age = this.test
+                },
+                immediate: true
+            }
+        },

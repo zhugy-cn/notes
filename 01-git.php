@@ -38,6 +38,10 @@ msysgit是Windows版的Git:  下载地址：https://git-for-windows.github.io
 
 
 
+
+    
+
+
     二。将云端的仓库克隆到本地：git clone <版本库的网址> <本地目录名>
 
     1. git clone git@gitee.com:zhugy-cn/projectFolder.git test         # 把地址上的远程仓库克隆到test文件夹里面，文件夹没有会新建
@@ -137,7 +141,7 @@ msysgit是Windows版的Git:  下载地址：https://git-for-windows.github.io
 
     git branch -m develop test                             # 分支重命名,将develop分支改名为test分支
 
-    git checkout -b 本地分支 远程分支                       # 拉取远程分支并切换
+    git checkout -b 本地分支 origin/远程分支                       # 拉取远程分支并切换
 
     git push --set-upstream origin develop                 # 建立本地当前分支与远程develop分支的链接（建立链接后可直接使用git push）
 
@@ -232,4 +236,9 @@ msysgit是Windows版的Git:  下载地址：https://git-for-windows.github.io
 
 
 
+        sourceTree 的使用
+
+        添加本地项目 Add
+
+        
     
