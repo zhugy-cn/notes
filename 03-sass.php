@@ -72,6 +72,47 @@
 
 
 
+				
+
+				
+				
+				
+				
+				
+
+
+				scss
+					变量：$app-bg: rgb(245,245,245);
+					mixin: 
+						@mixin vertical-center {
+							position: absolute;
+							top: 50%;
+							transform: translateY(-50%);
+						}
+						使用: @include vertical-center;
+
+
+
+
+
+
+				stylus
+					变量：$app-bg = rgb(245,245,245);
+					
+					mixin:
+						vertical-center()
+							position absolute
+							top: 50%
+							transform: translateY(-50%)  
+						使用: vertical-center();
+						
+					继承
+						@extend .border-bottom-1px;
+						
+					
+				
+				
+
 
 
 

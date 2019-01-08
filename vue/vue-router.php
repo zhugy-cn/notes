@@ -252,3 +252,11 @@
                     对比之前：component: demo3
                 8.4. 这时会将 demo3 组件渲染到没有name属性的view标签上，把nav组件渲染到name属性为slider的view标签上
             
+
+
+
+                to: 目标路由
+
+                form: 离开路由
+                
+                    

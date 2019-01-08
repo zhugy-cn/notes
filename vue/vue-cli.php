@@ -330,3 +330,11 @@ Should we run `npm install` for you after the project has been created? (recomme
           axios.get('api/test').then(res => {
             console.log(res);
         });
+
+
+        
+        @import '~@/assets/styles/variables.scss';
+
+        background-color: $tag-service;
+
+        
