@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <h1>我是自己配置的 404 页面啊</h1>
+
+  cd /usr/share/nginx/html
+
+  vim /etc/nginx/conf.d/default.conf
+
+  cd /etc/nginx/conf.d
+
+
+  查看ngixn 有没有启动
+  ps aux | grep nginx
+
+
+
+  server{
+  listen 80;
+  server_name game.zhugy.cn;
+  location / {
+  root /web/client/game;
+  index index.html index.htm;
+  }
+  gzip on;
+  gzip_types text/plain application/javascript text/css;
+  }
+
+
+
+
+  upstream api {
+  server 47.103.5.45:3000;
+  }
+  server {
+  listen 80;
+  server_name api.zhugy.cn;
+  location / {
+  proxy_pass http://api;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header Host $http_host;
+  proxy_set_header X-Nginx-Proxy true;
+  proxy_redirect off;
+  }
+  }
+
+
+
+  const http =require('http')
+  http.createServer(function(req,res){
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('hello world')
+  }).listen(3000)
+  console.log('api 端口成功');
+
+
+
+
+  <!-- https -->
+  upstream api {
+  server 47.103.5.45:3000;
+  }
+  server {
+  listen 443;
+  server_name api.zhugy.cn;
+  ssl on;
+  ssl_certificate ../cert/2071489_api.zhugy.cn.pem;
+  ssl_certificate_key ../cert/2071489_api.zhugy.cn.key;
+  ssl_session_timeout 5m;
+  ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  location / {
+  proxy_pass http://api;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header Host $http_host;
+  proxy_set_header X-Nginx-Proxy true;
+  proxy_redirect off;
+  }
+  }
+  server {
+  listen 80;
+  server_name api.zhugy.cn;
+  rewrite ^(.*)$ https://$host$1 permanent;
+  }
+
+
+  <!-- 代理 -->
+
+  upstream api {
+  server 47.103.5.45:3000;
+  }
+  server {
+  listen 80;
+  server_name api.zhugy.cn;
+  location / {
+  proxy_pass http://api;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header Host $http_host;
+  proxy_set_header X-Nginx-Proxy true;
+  proxy_redirect off;
+  }
+  }
+
+
+  启动
+  nginx
+
+
+  停止
+  nginx -s quit
+
+
+  重新载入配置文件
+  nginx -s reload
+
+
+  重启Nginx服务
+  systemctl restart nginx.service
+
+
+
+
+</body>
+
+</html>

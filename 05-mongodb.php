@@ -16,6 +16,9 @@
 		配置环境变量：
 		Path:   C:\Program Files\MongoDB\Server\3.6\bin
 
+		which mongod		判断mongodb是否安装成功
+
+	koa-generic-session koa-redis
 
 		命令：
 
@@ -26,6 +29,10 @@
 		mongo     使用链接数据库（另起命令行）
 
 		mongoimport     导入数据
+
+		c://data/db
+
+		不适合连表查询，适合频繁的读取操作，不支持事务回滚
 
 
 		基本命令
@@ -59,6 +66,62 @@
 		db.name.insert([{"_id":1},{"_id":2}])  批量添加
 
 		update修改器
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	</script>
 
